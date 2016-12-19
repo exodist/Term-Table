@@ -20,9 +20,9 @@ tests unicode_display_width => sub {
     tests no_unicode_linebreak => sub {
         my @table = table('header' => [ 'a', 'b'], 'rows'   => [[ '婧', '߃' ]]);
 
-        like(
-            \@table,
-            ["Unicode::GCString is not installed, table may not display all unicode characters properly"],
+        is(
+            $table[0],
+            "Unicode::GCString is not installed, table may not display all unicode characters properly",
             "got unicode note"
         );
     } unless USE_GCS;
