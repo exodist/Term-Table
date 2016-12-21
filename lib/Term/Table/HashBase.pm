@@ -12,7 +12,7 @@ use warnings;
 
 {
     no warnings 'once';
-    $Term::Table::HashBase::VERSION = '0.003';
+    $Term::Table::HashBase::VERSION = '0.002';
     *Term::Table::HashBase::ATTR_SUBS = \%Object::HashBase::ATTR_SUBS;
 }
 
