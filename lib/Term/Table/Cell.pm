@@ -93,6 +93,11 @@ sub break {
     $self->{+_BREAK} ||= Term::Table::LineBreak->new(string => $self->{+VALUE});
 }
 
+sub reset {
+    my $self = shift;
+    delete $self->{+_BREAK};
+}
+
 1;
 
 __END__
@@ -108,12 +113,6 @@ Term::Table::Cell - Representation of a cell in a table.
 =head1 DESCRIPTION
 
 This package is used to represent a cell in a table.
-
-=head1 SYNOPSIS
-
-use Term::Table::HashBase qw/value border_left border_right _break _widths border_color value_color reset_color/;
-
-=head1 ATTRIBUTES
 
 =head1 SOURCE
 

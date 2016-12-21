@@ -63,22 +63,23 @@ sub regen_columns {
     my $self = shift;
 
     my $has_header = $self->{+SHOW_HEADER} && @{$self->{+HEADER}};
-    my %new_row = (width => 0, count => $has_header ? -1 : 0);
+    my %new_col = (width => 0, count => $has_header ? -1 : 0);
 
-    my $cols = [map { {%new_row} } @{$self->{+HEADER}}];
+    my $cols = [map { {%new_col} } @{$self->{+HEADER}}];
     my @rows = @{$self->{+ROWS}};
 
     for my $row ($has_header ? ($self->{+HEADER}, @rows) : (@rows)) {
-        for my $ci (0 .. (@$row - 1)) {
-            $cols->[$ci] ||= {%new_row} if $self->{+AUTO_COLUMNS};
+        for my $ci (0 .. max(@$cols - 1, @$row - 1)) {
+            $cols->[$ci] ||= {%new_col} if $self->{+AUTO_COLUMNS};
             my $c = $cols->[$ci] or next;
-            $c->{idx} ||= $ci;
+            $c->{idx}  ||= $ci;
             $c->{rows} ||= [];
 
             my $r = $row->[$ci];
             $r = Term::Table::Cell->new(value => $r)
                 unless blessed($r)
-                && $r->isa('Term::Table::Cell');
+                && ($r->isa('Term::Table::Cell')
+                || $r->isa('Term::Table::CellStack'));
 
             $r->sanitize  if $self->{+SANITIZE};
             $r->mark_tail if $self->{+MARK_TAIL};
@@ -126,6 +127,11 @@ sub render {
     my $self = shift;
 
     my $cols = $self->columns;
+    for my $col (@$cols) {
+        for my $cell (@{$col->{rows}}) {
+            $cell->reset;
+        }
+    }
     my $width = sum(BORDER_SIZE, PAD_SIZE, DIV_SIZE * @$cols, map { $_->{width} } @$cols);
 
     #<<< NO-TIDY
@@ -146,10 +152,17 @@ sub render {
                 next;
             }
 
-            my $lw = $r->border_left_width;
-            my $rw = $r->border_right_width;
-            my $vw = $col->{width} - $lw - $rw;
-            my $v = $r->break->next($vw);
+            my ($v, $vw);
+
+            if ($r->isa('Term::Table::Cell')) {
+                my $lw = $r->border_left_width;
+                my $rw = $r->border_right_width;
+                $vw = $col->{width} - $lw - $rw;
+                $v = $r->break->next($vw);
+            }
+            elsif ($r->isa('Term::Table::CellStack')) {
+                ($v, $vw) = $r->break->next($col->{width});
+            }
 
             if (defined $v) {
                 $found++;
