@@ -79,7 +79,8 @@ sub regen_columns {
             $r = Term::Table::Cell->new(value => $r)
                 unless blessed($r)
                 && ($r->isa('Term::Table::Cell')
-                || $r->isa('Term::Table::CellStack'));
+                || $r->isa('Term::Table::CellStack')
+                || $r->isa('Term::Table::Spacer'));
 
             $r->sanitize  if $self->{+SANITIZE};
             $r->mark_tail if $self->{+MARK_TAIL};
@@ -145,6 +146,8 @@ sub render {
     while(1) {
         my @row;
 
+        my $is_spacer = 0;
+
         for my $col (@$cols) {
             my $r = $col->{rows}->[$row];
             unless($r) {
@@ -163,8 +166,14 @@ sub render {
             elsif ($r->isa('Term::Table::CellStack')) {
                 ($v, $vw) = $r->break->next($col->{width});
             }
+            elsif ($r->isa('Term::Table::Spacer')) {
+                $is_spacer = 1;
+            }
 
-            if (defined $v) {
+            if ($is_spacer) {
+                last;
+            }
+            elsif (defined $v) {
                 $found++;
                 my $bcolor = $r->border_color || '';
                 my $vcolor = $r->value_color  || '';
@@ -183,10 +192,10 @@ sub render {
         }
 
         if (!grep {$_ && m/\S/} @row) {
-            last unless $found;
+            last unless $found || $is_spacer;
 
             push @out => $border if $row == 0 && $self->{+SHOW_HEADER} && @{$self->{+HEADER}};
-            push @out => $spacer if $split > 1;
+            push @out => $spacer if $split > 1 || $is_spacer;
 
             $row++;
             $split = 0;
