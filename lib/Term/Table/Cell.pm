@@ -66,7 +66,7 @@ sub value_width {
     while (@parts) {
         my $text = shift @parts;
         my $sep  = shift @parts || '';
-        my $len = uni_length("$text$sep");
+        my $len = uni_length("$text");
         $max = $len if $len > $max;
     }
 

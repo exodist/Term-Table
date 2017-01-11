@@ -40,10 +40,7 @@ sub break {
             my $l = uni_length("$char");
             last unless $l;
 
-            if ($char eq "\n") {
-                last;
-                next;
-            }
+            last if $char eq "\n";
 
             if ($size + $l > $len) {
                 unshift @chars => $char;
@@ -53,6 +50,10 @@ sub break {
             $size += $l;
             $part .= $char;
         }
+
+        # If we stopped just before a newline, grab it
+        shift @chars if $size == $len && @chars && $chars[0] eq "\n";
+
         until ($size == $len) {
             $part .= ' ';
             $size += 1;

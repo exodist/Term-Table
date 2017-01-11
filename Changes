@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+    - Fix rendering issue when all lines are the same length
+
 0.005     2016-12-27 23:04:11-08:00 America/Los_Angeles
 
     - Add spacer
