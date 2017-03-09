@@ -27,7 +27,6 @@ sub break {
     $self->{+IDX} = 0;
     my $str = $self->{+STRING} . ""; # Force stringification
 
-    binmode(STDOUT, ':utf8');
     my @parts;
     my @chars = split //, $str;
     while (@chars) {
