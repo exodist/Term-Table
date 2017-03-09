@@ -2,7 +2,7 @@ package Term::Table::Util;
 use strict;
 use warnings;
 
-our $VERSION = '0.007';
+our $VERSION = '0.008';
 
 use Importer Importer => 'import';
 our @EXPORT_OK = qw/term_size USE_GCS USE_TERM_READKEY uni_length/;
