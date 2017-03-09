@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+    - Remove stray line that was setting STDOUT to utf8 (wtf?)
+
 0.006     2017-01-10 21:13:35-08:00 America/Los_Angeles
 
     - Fix rendering issue when all lines are the same length
