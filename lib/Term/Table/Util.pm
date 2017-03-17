@@ -5,7 +5,7 @@ use warnings;
 our $VERSION = '0.008';
 
 use Importer Importer => 'import';
-our @EXPORT_OK = qw/term_size USE_GCS USE_TERM_READKEY uni_length/;
+our @EXPORT_OK = qw/term_size USE_GCS USE_TERM_READKEY USE_TERM_SIZE_ANY uni_length/;
 
 sub DEFAULT_SIZE() { 80 }
 
@@ -17,10 +17,27 @@ sub try(&) {
     return ($ok, $err);
 }
 
+my ($tsa) = try { require Term::Size::Any; Term::Size::Any->import('chars') };
 my ($trk) = try { require Term::ReadKey };
 $trk &&= Term::ReadKey->can('GetTerminalSize');
 
-if ($trk) {
+if (!-t *STDOUT) {
+    *USE_TERM_READKEY  = sub() { 0 };
+    *USE_TERM_SIZE_ANY = sub() { 0 };
+    *term_size = \&DEFAULT_SIZE;
+}
+elsif ($tsa) {
+    *USE_TERM_READKEY = sub() { 0 };
+    *USE_TERM_SIZE_ANY = sub() { 1 };
+    *term_size = sub {
+        return $ENV{TABLE_TERM_SIZE} if $ENV{TABLE_TERM_SIZE};
+        my $size = chars(\*STDOUT);
+        return DEFAULT_SIZE if !$size;
+        return DEFAULT_SIZE if $size < DEFAULT_SIZE;
+        return $size;
+    };
+}
+elsif ($trk) {
     *USE_TERM_READKEY = sub() { 1 };
     *term_size = sub {
         return $ENV{TABLE_TERM_SIZE} if $ENV{TABLE_TERM_SIZE};
