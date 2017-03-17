@@ -3,7 +3,7 @@ requires "Importer" => "0.024";
 requires "List::Util" => "0";
 requires "Scalar::Util" => "0";
 requires "perl" => "5.008001";
-recommends "Term::ReadKey" => "2.32";
+recommends "Term::Size::Any" => "0.002";
 recommends "Unicode::GCString" => "2013.10";
 recommends "Unicode::LineBreak" => "2015.06";
 
