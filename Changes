@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+    - Further optimize term_size when SIGWINCH is supported
+
 0.008     2017-03-17 10:08:18-07:00 America/Los_Angeles
 
     - Prefer Term::Size::Any over Term::ReadKey
