@@ -23,7 +23,7 @@ my %WriteMakefileArgs = (
     "Scalar::Util" => 0
   },
   "TEST_REQUIRES" => {
-    "Test2::Tools::Tiny" => "1.302072",
+    "Test2::Tools::Tiny" => "1.302097",
     "utf8" => 0
   },
   "VERSION" => "0.012",
@@ -38,7 +38,7 @@ my %FallbackPrereqs = (
   "Importer" => "0.024",
   "List::Util" => 0,
   "Scalar::Util" => 0,
-  "Test2::Tools::Tiny" => "1.302072",
+  "Test2::Tools::Tiny" => "1.302097",
   "utf8" => 0
 );
 
