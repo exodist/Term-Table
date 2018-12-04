@@ -22,6 +22,7 @@ sub columns { uni_length($_[0]->{+STRING}) }
 sub break {
     my $self = shift;
     my ($len) = @_;
+
     $self->{+_LEN} = $len;
 
     $self->{+IDX} = 0;
