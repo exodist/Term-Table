@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+    - Update inlined Object::HashBase
+
 0.014     2019-10-15 16:54:41-07:00 America/Los_Angeles
 
     - Clone STDOUT on load in case it gets changed later
