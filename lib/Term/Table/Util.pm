@@ -13,7 +13,7 @@ sub DEFAULT_SIZE() { 80 }
 
 my $IO;
 BEGIN {
-    open($IO, '>&', STDOUT) or die "Could not clone STDOUT";
+    open($IO, '>&', *STDOUT) or die "Could not clone STDOUT";
 }
 
 sub try(&) {
