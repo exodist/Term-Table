@@ -276,8 +276,8 @@ wrong. This module is able to generic format rows of data into tables.
 
         header => ['name', 'age', 'hair color'],
         rows   => [
-            ['Fred Flinstone',  2000000, 'black'],
-            ['Wilma Flinstone', 1999995, 'red'],
+            ['Fred Flintstone',  2000000, 'black'],
+            ['Wilma Flintstone', 1999995, 'red'],
             ...
         ],
     );
@@ -286,13 +286,13 @@ wrong. This module is able to generic format rows of data into tables.
 
 This prints a table like this:
 
-    +-----------------+---------+------------+
-    | name            | age     | hair color |
-    +-----------------+---------+------------+
-    | Fred Flinstone  | 2000000 | black      |
-    | Wilma Flinstone | 1999995 | red        |
-    | ...             | ...     | ...        |
-    +-----------------+---------+------------+
+    +------------------+---------+------------+
+    | name             | age     | hair color |
+    +------------------+---------+------------+
+    | Fred Flintstone  | 2000000 | black      |
+    | Wilma Flintstone | 1999995 | red        |
+    | ...              | ...     | ...        |
+    +------------------+---------+------------+
 
 =head1 INTERFACE
 
