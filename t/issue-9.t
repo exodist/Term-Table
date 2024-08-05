@@ -33,8 +33,8 @@ my $ok = eval {
     1;
 };
 
-ok($@ !~ m/timeout/, "Did not timeout", $@);
-ok($@ =~ m/Table is too large \(9 including 4 padding\) to fit into max-width \(4\)/, "Threw proper exception", $@);
+ok($@ !~ m/timeout/, "Did not timeout");
+ok($@ =~ m/Table is too large \(9 including 4 padding\) to fit into max-width \(4\)/, "Threw proper exception");
 ok(!@table, "Did not render");
 
 
@@ -48,8 +48,8 @@ $ok = eval {
     1;
 };
 
-ok($@ !~ m/timeout/, "Did not timeout", $@);
-ok($@ =~ m/Table is too large \(5 including 0 padding\) to fit into max-width \(4\)/, "Threw proper exception", $@);
+ok($@ !~ m/timeout/, "Did not timeout");
+ok($@ =~ m/Table is too large \(5 including 0 padding\) to fit into max-width \(4\)/, "Threw proper exception");
 ok(!@table, "Did not render");
 
 
@@ -63,8 +63,8 @@ $ok = eval {
     1;
 };
 
-ok($ok, "Did not die", $@);
-ok($@ !~ m/timeout/, "Did not timeout", $@);
+ok($ok, "Did not die");
+ok($@ !~ m/timeout/, "Did not timeout");
 ok(@table, "rendered");
 ok(length($table[0]) == 5, "overflow in rendering");
 

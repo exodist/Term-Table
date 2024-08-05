@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+    - Fix test broken on Test::More
+
 0.019     2024-08-05 07:07:59-07:00 America/Los_Angeles
 
     - Fix use cycle between Test-Simple and Term::Table now that Test2::Suite was merged into Test-Simple
