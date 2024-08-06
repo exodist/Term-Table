@@ -34,7 +34,7 @@ sub init {
 sub char_id {
     my $class = shift;
     my ($char) = @_;
-    return "\\N{U+" . sprintf("\%X", ord($char)) . "}";
+    return "\\N{U+" . sprintf("\%X", utf8::native_to_unicode(ord($char))) . "}";
 }
 
 sub show_char {
