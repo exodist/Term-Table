@@ -28,7 +28,7 @@ my ($tsa) = try { require Term::Size::Any; Term::Size::Any->import('chars') };
 my ($trk) = try { require Term::ReadKey };
 $trk &&= Term::ReadKey->can('GetTerminalSize');
 
-if (!-t $IO) {
+if (!-t $IO && !-p $IO) {
     *USE_TERM_READKEY  = sub() { 0 };
     *USE_TERM_SIZE_ANY = sub() { 0 };
     *term_size         = sub {
