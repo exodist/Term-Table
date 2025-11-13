@@ -2,7 +2,7 @@ package Term::Table::CellStack;
 use strict;
 use warnings;
 
-our $VERSION = '0.026';
+our $VERSION = '0.027';
 
 use Term::Table::HashBase qw/-cells -idx/;
 
