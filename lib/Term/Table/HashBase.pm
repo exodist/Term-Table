@@ -2,7 +2,7 @@ package Term::Table::HashBase;
 use strict;
 use warnings;
 
-our $VERSION = '0.028';
+our $VERSION = '0.029';
 
 #################################################################
 #                                                               #

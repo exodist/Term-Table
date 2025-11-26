@@ -24,7 +24,7 @@ my %WriteMakefileArgs = (
   "TEST_REQUIRES" => {
     "utf8" => 0
   },
-  "VERSION" => "0.028",
+  "VERSION" => "0.029",
   "test" => {
     "TESTS" => "t/*.t t/Table/*.t"
   }
