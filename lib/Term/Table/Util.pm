@@ -38,7 +38,7 @@ if ($tsa) {
     *USE_TERM_READKEY  = sub() { 0 };
     *USE_TERM_SIZE_ANY = sub() { 1 };
     *_term_size        = sub {
-        my $size = max map { chars($_) // DEFAULT_SIZE } @IO;
+        my $size = max map { chars($_) || DEFAULT_SIZE } @IO;
 
         if (!$size || $size < DEFAULT_SIZE) {
             return $ENV{COLUMNS} if $ENV{COLUMNS} && $ENV{COLUMNS} > DEFAULT_SIZE;
